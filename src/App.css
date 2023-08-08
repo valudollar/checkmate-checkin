@@ -119,6 +119,9 @@
   height: 30rem;
   border: solid black 0.5rem;
   margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .tagsDiv {
   display: flex;

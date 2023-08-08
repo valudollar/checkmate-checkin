@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function Weigh() {
   const location = useLocation();
+  const [destination, setDestination] = useState(location.state.destination);
   const [numberofBags, setnumberofBags] = useState(location.state.number);
   const navigate = useNavigate();
   const bagNumber = useParams().bagnumber;
@@ -33,7 +34,12 @@ function Weigh() {
       setLoading(false);
       const random = generateRandomNumber();
       setWeight(random);
-      setType("Regular");
+      if (random > 23.0) {
+        setType("Overweight");
+      } else {
+        setType("Regular");
+      }
+
       setWeighed(true);
     }, 1000);
   }
@@ -50,13 +56,13 @@ function Weigh() {
       console.log(bagdata, "final check");
       console.log("time to print tags!");
       navigate("/bagtag", {
-        state: { data: bagdata },
+        state: { data: bagdata, destination: destination },
       });
     } else {
       const nextBagNumber = parseInt(bagNumber) + 1;
 
       navigate(`/bag/${nextBagNumber}`, {
-        state: { number: bagNumber },
+        state: { number: bagNumber, destination: destination },
       });
     }
   }

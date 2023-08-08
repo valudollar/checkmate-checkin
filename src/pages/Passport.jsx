@@ -54,7 +54,9 @@ function Passport() {
   }
 
   function confirm() {
-    navigate("/baggage");
+    navigate("/baggage", {
+      state: { destination: destination },
+    });
   }
   return (
     <>

@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function Baggage() {
+  const location = useLocation();
   const [number, setNumber] = useState("1");
+  const [destination, setDestination] = useState(location.state.destination);
   const navigate = useNavigate();
   function handleconfirm() {
     navigate("/bag/1", {
-      state: { number: number },
+      state: { number: number, destination: destination },
     });
   }
   function handleNumber(e) {
