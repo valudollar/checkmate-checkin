@@ -1,9 +1,58 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
 function Passport() {
   const navigate = useNavigate();
   const location = useLocation();
   const [airline, setAirline] = useState(location.state.airline);
+  const [flightnumber, setFlightNumber] = useState("");
+  const [destination, setDestination] = useState("");
+  const [pnr, setPNR] = useState("");
+
+  useEffect(() => {
+    generateFlightNumber();
+    generatePNR();
+  }, []);
+
+  function generateFlightNumber() {
+    let details = 0;
+    if (airline === "Singapore Airlines") {
+      const numbers = [
+        { number: "SQ32", destination: "San Francisco" },
+        { number: "SQ34", destination: "San Francisco" },
+        { number: "SQ618", destination: "Osaka" },
+        { number: "SQ622", destination: "Osaka" },
+        { number: "SQ12", destination: "Narita" },
+        { number: "SQ638", destination: "Narita" },
+      ];
+      details = numbers[Math.floor(Math.random() * numbers.length)];
+    }
+    if (airline === "United Airlines") {
+      const numbers = [
+        { number: "UA2", destination: "San Francisco" },
+        { number: "UA28", destination: "San Francisco" },
+        { number: "UA8014", destination: "Narita" },
+        { number: "UA7934", destination: "Narita" },
+      ];
+
+      details = numbers[Math.floor(Math.random() * numbers.length)];
+    }
+    setFlightNumber(details.number);
+    setDestination(details.destination);
+  }
+
+  function generatePNR() {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let result = "";
+
+    for (let i = 0; i < 6; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters[randomIndex];
+    }
+
+    setPNR(result);
+  }
+
   function confirm() {
     navigate("/baggage");
   }
@@ -14,9 +63,9 @@ function Passport() {
           <h1>Flight Details</h1>
           <div className="detailContent">
             <div className="detailLabels">
-              <h2>Airline</h2>
+              <h2>Airline :</h2>
               <h2>Flight Number :</h2>
-              <h2>PNR:</h2>
+              <h2>PNR :</h2>
               <h2>Date : </h2>
               <h2>Time : </h2>
               <h2>From : </h2>
@@ -27,12 +76,12 @@ function Passport() {
             </div>
             <div className="detailValues">
               <h2>{airline}</h2>
-              <h2>generated</h2>
-              <h2>generated</h2>
-              <h2>date </h2>
-              <h2>time</h2>
+              <h2>{flightnumber}</h2>
+              <h2>{pnr}</h2>
+              <h2>15 August 2023 </h2>
+              <h2>12.30pm</h2>
               <h2>Singapore</h2>
-              <h2>New York</h2>
+              <h2>{destination}</h2>
               <h2>3</h2>
               <h2>F</h2>
               <h2>43B</h2>
