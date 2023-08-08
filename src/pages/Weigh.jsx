@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function Weigh() {
@@ -10,6 +10,14 @@ function Weigh() {
   const [weight, setWeight] = useState("-");
   const [type, setType] = useState("-");
   const [weighed, setWeighed] = useState(false);
+  const [bagdata, setBagData] = useState({});
+
+  useEffect(() => {
+    setLoading(false);
+    setWeight("-");
+    setType("-");
+    setWeighed(false);
+  }, [bagNumber]);
 
   function handleWeigh() {
     setLoading(true);
