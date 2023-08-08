@@ -50,7 +50,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   width: 10rem;
-  margin: 1rem;
+  margin: 2rem;
 }
 
 button:hover {

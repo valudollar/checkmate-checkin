@@ -6,7 +6,9 @@ function Bagtag() {
   const navigate = useNavigate();
 
   function confirm() {
-    navigate("/print");
+    navigate("/print", {
+      state: { data: data },
+    });
   }
   return (
     <>
