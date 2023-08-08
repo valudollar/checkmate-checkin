@@ -10,7 +10,6 @@ function Baggage() {
     });
   }
   function handleNumber(e) {
-    console.log(e.target.value, "hello");
     const selectedNo = e.target.value;
     setNumber(selectedNo);
   }

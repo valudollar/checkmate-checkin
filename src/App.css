@@ -47,15 +47,10 @@
 }
 
 .buttonDiv {
-  margin-top: 1rem;
-  width: 100%;
+  margin-bottom: 2rem;
+  width: 95%;
   display: flex;
   justify-content: flex-end;
-}
-.tagBody {
-  width: 20rem;
-  height: 30rem;
-  border: solid black 0.5rem;
 }
 
 .airlineDiv {
@@ -117,4 +112,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.tagBody {
+  width: 20rem;
+  height: 30rem;
+  border: solid black 0.5rem;
+  margin: 1rem;
+}
+.tagsDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 90%;
+}
+
+.bagtagDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

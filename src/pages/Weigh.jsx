@@ -10,7 +10,7 @@ function Weigh() {
   const [weight, setWeight] = useState("-");
   const [type, setType] = useState("-");
   const [weighed, setWeighed] = useState(false);
-  const [bagdata, setBagData] = useState({});
+  const [bagdata, setBagData] = useState([]);
 
   useEffect(() => {
     setLoading(false);
@@ -19,11 +19,20 @@ function Weigh() {
     setWeighed(false);
   }, [bagNumber]);
 
+  useEffect(() => {
+    const data = { type: type, weight: weight };
+    setBagData((prevBagData) => ({
+      ...prevBagData,
+      [bagNumber]: { ...data },
+    }));
+  }, [weight, type]);
+
   function handleWeigh() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      setWeight(generateRandomNumber());
+      const random = generateRandomNumber();
+      setWeight(random);
       setType("Regular");
       setWeighed(true);
     }, 1000);
@@ -37,18 +46,15 @@ function Weigh() {
     return generatedNumber.toFixed(1);
   }
   function handleNext() {
-    // console.log(bagNumber, "hello2");
-    // setBagDetails((prevDetails) => ({
-    //   ...prevDetails,
-    //   [`Bag ${bagNumber}`]: { ...bagDetails },
-    // }));
-
     if (bagNumber === numberofBags) {
-      // navigate("/bagtag", { bagDetails });
+      console.log(bagdata, "final check");
       console.log("time to print tags!");
-      navigate("/bagtag");
+      navigate("/bagtag", {
+        state: { data: bagdata },
+      });
     } else {
       const nextBagNumber = parseInt(bagNumber) + 1;
+
       navigate(`/bag/${nextBagNumber}`, {
         state: { number: bagNumber },
       });
